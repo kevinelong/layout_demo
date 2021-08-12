@@ -1,0 +1,146 @@
+<style>
+    .shad {
+        box-shadow: 3px 3px 9px -3px rgba(0, 0, 0, 0.5);
+    }
+
+    .mid {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: fit-content;
+        width: -moz-fit-content;
+        box-sizing: border-box;
+    }
+
+    .full {
+        width: 36px;
+        height: 36px;
+    }
+
+    .rounded {
+        border-radius: 0.5vh;
+    }
+
+    .glow {
+        border: 1px solid #F5F5F5;
+    }
+
+    .bright {
+        background: #F2F2F2;
+    }
+
+    .bar .tool {
+        margin: 4px 4px 0 4px;
+    }
+
+    .bar .tool svg,
+    .bar .tool img{
+        z-index: 200;
+    }
+
+    .fill {
+        position: absolute;
+        left: auto;
+        right: auto;
+        top: auto;
+        bottom: auto;
+    }
+
+    .bar .tool {
+        cursor: pointer;
+    }
+
+    .bar .tool .frame {
+        transition: all 300ms;
+        width: 0;
+        height: 0;
+        background: #ddddddff;
+        border-radius: 100%;
+        z-index: 100;
+    }
+
+    .bar .tool:hover .frame {
+        width: 36px;
+        height: 36px;
+    }
+
+    .bar .tool .badge {
+        z-index: 300;
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 1px;
+        transform: translateX(10%) translateY(-10%);
+        background: #555555;
+        border: 1px solid rgba(255, 255, 255, 0.75);
+        border-radius: 100%;
+    }
+
+    .bar .tool .badge .text {
+        color: #FFFFFF;
+        font-size: 11px;
+        min-height: 15px;
+        min-width: 15px;
+        user-select: none;
+        font-family: sans-serif;
+    }
+
+    body {
+        background-color: #dddddd;
+    }
+
+    .title {
+        padding: 0.5vh;
+        position: absolute;
+        left: 1vh;
+        top: 1vh;
+    }
+
+    .toolbar {
+        padding: 0.5vh;
+        position: absolute;
+        right: 1vh;
+        top: 1vh;
+    }
+    .views {
+        padding: 0.5vh;
+        position: absolute;
+        right: 1vh;
+        top: calc(1vh + 72px);
+    }
+
+</style>
+
+<body></body>
+
+<script>
+    const Icon = () => `
+<svg width="24" height="24" viewBox="0 0 24 24" fill="#777777" style="transform: translate(0,0)">
+    <rect x="4" y="4" width="5" height="5" rx="2" fill="#000000"></rect>
+    <rect x="4" y="10" width="5" height="5" rx="2" fill="#444444"></rect>
+    <rect x="4" y="16" width="5" height="5" rx="2" fill="#888888"></rect>
+
+    <rect x="10" y="4" width="5" height="5" rx="2" fill="#000000"></rect>
+    <rect x="10" y="10" width="5" height="5" rx="2" fill="#444444"></rect>
+    <rect x="10" y="16" width="5" height="5" rx="2" fill="#888888"></rect>
+
+    <rect x="16" y="4" width="5" height="5" rx="2" fill="#000000"></rect>
+    <rect x="16" y="10" width="5" height="5" rx="2" fill="#444444"></rect>
+    <rect x="16" y="16" width="5" height="5" rx="2" fill="#888888"></rect>
+</svg>
+`;
+
+    const Badge = quantity => `<div class="badge"><div class="text mid">${quantity}</div></div>`;
+    const Tool = (icon, badge) => `<div class="tool mid full">${badge}<div class="frame mid fill"></div>${icon}</div>`;
+    const Bar = (content, className = "") => `<div class="bar mid shad glow bright rounded ${className}">${content}</div>`;
+    const icon_email = `<img src="assets/icons/icon-user-email.svg">`
+
+    let output = "";
+    output += Bar(Tool(icon_email, Badge("1")) + Tool(Icon(), Badge("99+")), "toolbar");
+    output += Bar(Tool(Icon(), Badge("1")) + Tool(Icon(), Badge("99+")), "views");
+    output += Bar(`<img src="assets/logo.svg">`, "title");
+
+    document.body.innerHTML += output;
+</script>
